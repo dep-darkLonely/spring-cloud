@@ -1,0 +1,22 @@
+# 基本信息配置
+spring:
+  application:
+    name: /
+server:
+  port: 8000
+
+# eureka server 相关配置
+eureka:
+  dashboard:
+    enabled: true
+  instance:
+    # 健康检查相关配置
+    health-check-url-path: /health
+    # home页相关配置
+    home-page-url-path: /
+    hostname: 192.168.8.129
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

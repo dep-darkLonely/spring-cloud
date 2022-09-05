@@ -1,0 +1,24 @@
+server:
+  port: 8888
+
+# eureka 相关配置
+eureka:
+  instance:
+    appname: hanbin-oauth2.0
+    # 优先获取IP地址
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://192.168.8.129:8000/eureka/
+    enabled: true
+    # 从 eureka server 拉去 服务注册表信息
+    fetch-registry: true
+
+# spring 相关配置
+spring:
+  application:
+    name: /
+logging:
+  level:
+    org.springframework.security: trace
+    org.springframework.security.oauth2: trace
