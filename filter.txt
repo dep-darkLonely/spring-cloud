@@ -3,17 +3,36 @@ org.apache.catalina.core.StandardWrapperValve#invoke
 ======= tomcat 中filter 对象属性
 ApplicationFilterConfig[name=springSecurityFilterChain,
 
+# asyncmanager 和 springweb的继承
 org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter
+#### securityContext 持久化 Filter
 org.springframework.security.web.context.SecurityContextPersistenceFilter
+### 扩展当前request 的 header ，可增加自定义属性
 org.springframework.security.web.header.HeaderWriterFilter
+### 防止csrf（跨站伪造） 攻击的filter
 org.springframework.security.web.csrf.CsrfFilter
+### 登出，清空securityContext上下文
 org.springframework.security.web.authentication.logout.LogoutFilter
+### 用户、密码认证过滤器
+#### 认证流程：
+###### 1.是否需要认证
+###### 2.尝试认证，成功返回authenticationResult 认证结果, 否则：失败
+###### 3.处理session，防止固定会话攻击
+###### 4.认证成功之前是否存在filter
+###### 5.认证成功之后的行为：1.设置securityContext 2.执行RememberMeServices服务 3.发送一个交互式认证成功的Event 4.委托执行一个成功的Handler
 org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+###### 默认生成登录页面的Filter
 org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter
+###### 默认登出页面的Filter
 org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter
+###### request cache 缓存Filter
 org.springframework.security.web.savedrequest.RequestCacheAwareFilter
+###### 
 org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter
+######
 org.springframework.security.web.authentication.AnonymousAuthenticationFilter
 org.springframework.security.web.session.SessionManagementFilter
 org.springframework.security.web.access.ExceptionTranslationFilter
+#### 授权过滤器，用于方法权限的校验
 org.springframework.security.web.access.intercept.AuthorizationFilter
+
